@@ -17,13 +17,17 @@ import java.nio.file.Paths;
 
 public class Generate {
 
-	public static void createQRCode(String text) {
+	public static void createQRCode(String [] text) {
+		
+		String textInput = text[0];
+		String namaFile = text[1];
+		
 	    Charset charset = Charset.forName("ISO-8859-1");
 	    CharsetEncoder encoder = charset.newEncoder();
 	    byte[] b = null;
 	    try {
 	        // Convert a string to ISO-8859-1 bytes in a ByteBuffer
-	        ByteBuffer bbuf = encoder.encode(CharBuffer.wrap(text));
+	        ByteBuffer bbuf = encoder.encode(CharBuffer.wrap(textInput));
 	        b = bbuf.array();
 	    } catch (CharacterCodingException e) {
 	        System.out.println(e.getMessage());
@@ -48,7 +52,7 @@ public class Generate {
 	        System.out.println(e.getMessage());
 	    }
 	    
-	    Path path = Paths.get("/home/saifi/GAZA/QRCODE/"+ text + ".PNG");
+	    Path path = Paths.get("/home/saifi/GAZA/QRCODE/"+ namaFile + ".PNG");
 	    
 	    try {
 	        MatrixToImageWriter.writeToPath(matrix, "PNG", path); 
